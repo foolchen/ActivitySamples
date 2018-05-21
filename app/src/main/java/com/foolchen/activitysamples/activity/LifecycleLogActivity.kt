@@ -1,7 +1,6 @@
 package com.foolchen.activitysamples.activity
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.support.v7.app.AppCompatActivity
 import com.foolchen.activitysamples.utils.logMethod
 
@@ -19,10 +18,15 @@ abstract class LifecycleLogActivity : AppCompatActivity() {
         "savedInstanceState")
   }
 
-  override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-    super.onCreate(savedInstanceState, persistentState)
-    logMethod("Lifecycle", localClassName, "onCreate",
-        "savedInstanceState", "persistentState")
+
+  override fun onStart() {
+    super.onStart()
+    logMethod("Lifecycle", localClassName, "onStart")
+  }
+
+  override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+    super.onRestoreInstanceState(savedInstanceState)
+    logMethod("Lifecycle", localClassName, "onRestoreInstanceState")
   }
 
   override fun onPostCreate(savedInstanceState: Bundle?) {
@@ -30,18 +34,6 @@ abstract class LifecycleLogActivity : AppCompatActivity() {
     logMethod("Lifecycle", localClassName, "onPostCreate",
         "savedInstanceState")
   }
-
-  override fun onPostCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-    super.onPostCreate(savedInstanceState, persistentState)
-    logMethod("Lifecycle", localClassName, "onPostCreate",
-        "savedInstanceState", "persistentState")
-  }
-
-  override fun onStart() {
-    super.onStart()
-    logMethod("Lifecycle", localClassName, "onStart")
-  }
-
   override fun onResume() {
     super.onResume()
     logMethod("Lifecycle", localClassName, "onResume")
@@ -55,6 +47,11 @@ abstract class LifecycleLogActivity : AppCompatActivity() {
   override fun onPause() {
     super.onPause()
     logMethod("Lifecycle", localClassName, "onPause")
+  }
+
+  override fun onSaveInstanceState(outState: Bundle?) {
+    super.onSaveInstanceState(outState)
+    logMethod("Lifecycle", localClassName, "onSaveInstanceState")
   }
 
   override fun onStop() {
